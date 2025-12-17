@@ -1,0 +1,22 @@
+# Audio processing
+pydub>=0.25.1
+
+# Noise reduction & advanced audio handling (newly added)
+noisereduce>=3.0.0
+librosa>=0.10.0
+soundfile>=0.12.1   # Required for librosa/noisereduce to read/write audio
+# Install with: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+# FastAPI & Server
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+
+# Optional: For public URL tunneling (ngrok)
+pyngrok>=7.0.0
+
+# Utilities
+tqdm>=4.66.1
+
+# NVIDIA NeMo ASR (latest from GitHub main branch)
+git+https://github.com/NVIDIA/NeMo.git@main#egg=nemo_toolkit[asr]
