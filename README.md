@@ -31,8 +31,8 @@ Ideal for transcribing podcasts, audiobooks, interviews, meetings, narrations, o
 
 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/parakeet-asr-api.git
-cd parakeet-asr-api
+git clone https://github.com/Khairul-islam99/Nemo_ASR.git
+cd Nemo_ASR
 ```
 2. Create and activate conda environment
 ```bash
