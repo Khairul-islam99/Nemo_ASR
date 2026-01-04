@@ -1,16 +1,10 @@
-# main.py
-"""
-FastAPI application for Parakeet ASR transcription service.
-Returns only the full transcription text.
-Run with: uvicorn main:app --host 0.0.0.0 --port 8000
-"""
-
 import os
 import shutil
 import logging
+import torch  # Required for GPU checks
 from fastapi import FastAPI, UploadFile, File, HTTPException
 
-from asr_engine import transcribe_audio, save_full_text  # save_full_text is optional
+from asr_engine import transcribe_audio, save_full_text
 from config import Config
 
 # Logging setup
@@ -23,14 +17,38 @@ app = FastAPI(
     version="1.0.0"
 )
 
-@app.get("/")
-def home():
-    """Health check endpoint."""
+
+
+@app.get("/health")
+def health():
+    """
+    Health check endpoint.
+    Returns status of the API and the GPU/CUDA hardware details.
+    """
+    # Check GPU/CUDA availability
+    if torch.cuda.is_available():
+        gpu_name = torch.cuda.get_device_name(0)
+        gpu_count = torch.cuda.device_count()
+        device_status = "CUDA"
+        gpu_ok = True
+    else:
+        gpu_name = "N/A"
+        gpu_count = 0
+        device_status = "CPU"
+        gpu_ok = False
+
     return {
-        "message": "Parakeet ASR API is running!",
+        "status": "active",
         "model": Config.MODEL_NAME,
-        "note": "Returns only full transcription text."
+        "hardware": {
+            "device": device_status,
+            "gpu_available": gpu_ok,
+            "gpu_name": gpu_name,
+            "gpu_count": gpu_count
+        }
     }
+
+
 
 @app.post("/transcribe")
 async def transcribe(file: UploadFile = File(...)):

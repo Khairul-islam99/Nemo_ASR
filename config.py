@@ -14,7 +14,7 @@ class Config:
     # Chunking settings (as per your preference)
     LONG_AUDIO_THRESHOLD_MINUTES = 30   # If audio > 30 minutes → use more chunks
     NUM_CHUNKS_LONG = 15                # For >30 min audio: 15 chunks (faster processing)
-    NUM_CHUNKS_SHORT = 7                # For ≤30 min audio: 7 chunks
+    NUM_CHUNKS_SHORT = 5                # For ≤30 min audio: 5 chunks
     
     # Supported audio formats
     SUPPORTED_AUDIO_EXTENSIONS = ('.wav', '.mp3', '.m4a', '.flac', '.ogg')
